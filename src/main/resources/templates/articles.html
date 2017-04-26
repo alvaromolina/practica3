@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Boot Example</title>
+
+</head>
+<body>
+
+<a href="/article/new">Nuevo articulo</a>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(articles)}">
+        <h2>Product List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>title</th>
+                <th>text</th>
+                <th>fecha</th>
+                <th>categoria</th>
+                <th>autor</th>
+                <th>likes</th>
+
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="article : ${articles}">
+                <td th:text="${article.id}"><a href="/article/${article.id}">Id</a></td>
+                <td th:text="${article.title}">title</td>
+                <td th:text="${article.text}">text</td>
+                <td th:text="${article.date}">fecha</td>
+
+                <td th:text="${article.category == null ? '' : article.category.name}">category</td>
+                <td th:text="${article.autor == null ? '' : article.autor.name}">autor</td>
+                <td th:text="${article.likes}">likes</td>
+
+                <td><a th:href="${ '/article/' + article.id}">View</a></td>
+                <td><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
+                <td><a th:href="${'/article/delete/' + article.id}">Delete</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

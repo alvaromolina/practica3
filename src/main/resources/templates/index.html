@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Boot Example</title>
+
+</head>
+<body>
+<div>
+    <h1>Blog</h1>
+    <div class="col-sm-10">
+        <div th:each="article : ${articles}">
+            <div th:if="${article.toShow}">
+                <p th:text="${article.title}"><b>text</b></p>
+                <p th:text="${article.text}">text</p>
+                <p th:text="${article.date}">date</p>
+                <b>Categoria:</b>
+                <p th:text="${article.category == null ? '' : article.category.name}">category</p>
+                <b>Autor:</b>
+                <p th:text="${article.autor == null ? '' : article.autor.name}">autor</p>
+                <p>Likes:</p>
+                <td th:text="${article.likes}">likes</td>
+                <a th:href="'/article/like/'+ ${article.id}" >Like</a>
+                <a th:href="'/article/dislike/'+ ${article.id}" >Dislike</a>
+                <hr></hr>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <div th:each="comment : ${article.comments}">
+                            <p th:text="${comment.text}">text</p>
+                            <p th:text="${comment.date}">date</p>
+                            <a th:href="'/comment/like/'+ ${comment.id}" >Like</a>
+                            <a th:href="'/comment/dislike/'+ ${comment.id}" >Dislike</a>
+                            <p>Likes: </p>
+                            <td th:text="${comment.likes}">likes</td>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
